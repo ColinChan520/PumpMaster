@@ -1,6 +1,6 @@
 [
   {
-    "firstName": "John",
+    "username": "John",
     "lastName": "Doe",
     "address": "123 Farm Lane",
     "phone": "1234567890",
@@ -8,7 +8,7 @@
     "password": "password123"
   },
   {
-    "firstName": "Alice",
+    "username": "Alice",
     "lastName": "Smith",
     "address": "789 Orchard Road",
     "phone": "9876543210",

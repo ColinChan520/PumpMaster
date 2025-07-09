@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Link } from '@mui/material';
 import { useUserStore } from '../stores/userStore.ts';
-import { loginApi } from '../api/auth.ts';
 import Navbar from '../components/LoginNavBar.tsx';
+import usersData from '../assets/users.json';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -14,19 +14,26 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     setError('');
-    try {
-      const token = await loginApi(username, password);
-      setUser({ username, token });
-      navigate('/overview');
-    } catch (err: any) {
-      setError(err.message || 'Login failed');
+
+    const foundUser = usersData.find(
+      (u) => u.username === username && u.password === password
+    );
+    // console.log("Run 1");
+
+    if (!foundUser) {
+      setError('Invalid username or password');
+    //   console.log("Run 2");
+      return;
     }
+    // console.log("Run 3");
+
+    setUser({ username: foundUser.email, token: 'test-token' });
+    navigate('/overview');
   };
 
   return (
     <div style={{ backgroundColor: '#fff', minHeight: '100vh', minWidth: '100vw' }}>
-
-        <Navbar />
+      <Navbar />
 
       <div style={{
         maxWidth: '40%',
@@ -44,10 +51,11 @@ export default function LoginPage() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+
         <TextField
           label="Password"
           placeholder="Enter your password"
-          type="password"
+          type="text"  
           margin="normal"
           fullWidth
           value={password}
@@ -67,7 +75,7 @@ export default function LoginPage() {
         </Button>
 
         <p style={{ textAlign: 'center', marginTop: '16px', color: '#000' }}>
-          Don&apos;t have an account?  {' '}
+          Don&apos;t have an account?{' '}
           <Link href="/register" underline="hover">
             Register
           </Link>

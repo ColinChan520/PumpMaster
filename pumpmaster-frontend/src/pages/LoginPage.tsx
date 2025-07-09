@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Link } from '@mui/material';
 import { useUserStore } from '../stores/userStore.ts';
 import Navbar from '../components/LoginNavBar.tsx';
-import usersData from '../assets/users.json';
+import usersData from '../assets/usersInformation.json';
 
 export default function LoginPage() {
   const navigate = useNavigate();

@@ -24,4 +24,8 @@ export async function put(url: string, body: any) {
   return await mockFetch(url, 'PUT', body);
 }
 
+export async function deleteReq(url: string, body: any) {
+  return await mockFetch(url, 'DELETE', body);
+}
+
 

@@ -5,6 +5,32 @@
       "username": "john@example.com",
       "token": "token123"
     }
+  },
+  "/pumps/add": {
+    "status": 200,
+    "data": {}
+  },
+  "/pumps/get": {
+    "status": 200,
+    "data": [
+        {
+        "id": "pump1",
+        "info": "Pump 1 details"
+      },
+      {
+        "id": "pump2",
+        "info": "Pump 2 details"
+      }
+]
+  },
+  "/pumps/edit": {
+    "status": 200,
+    "data": {}
+  }
+  ,
+  "/pumps/delete": {
+    "status": 200,
+    "data": {}
   }
 }
 

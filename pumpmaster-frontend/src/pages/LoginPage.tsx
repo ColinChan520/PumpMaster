@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Link } from '@mui/material';
 import { useUserStore } from '../stores/userStore.ts';
 import Navbar from '../components/LoginNavBar.tsx';
-import usersData from '../assets/usersInformation.json';
+import { post } from '../api/axios.ts';
+// import usersData from '../assets/usersInformation.json';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -14,21 +15,15 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     setError('');
-
-    const foundUser = usersData.find(
-      (u) => u.username === username && u.password === password
-    );
-    // console.log("Run 1");
-
-    if (!foundUser) {
-      setError('Invalid username or password');
-    //   console.log("Run 2");
-      return;
+    const res = await post('/auth/login', { username, password });
+    console.log(res);
+    if (res.status !== 200) {
+        setError('Invalid username or password');
+        return;
     }
-    // console.log("Run 3");
-
-    setUser({ username: foundUser.email, token: 'test-token' });
+    setUser({ username: res.data.username, token: res.data.token });
     navigate('/overview');
+    
   };
 
   return (

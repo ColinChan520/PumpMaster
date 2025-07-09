@@ -1,29 +1,27 @@
-// src/api/axios.ts
-import axios from 'axios';
+// import axios from 'axios';
+import { mockFetch } from '../mocks/mockMiddleware';
 
-export const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL, 
-  timeout: 8000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// export const apiClient = axios.create({
+//   baseURL: import.meta.env.VITE_API_BASE_URL, 
+//   timeout: 8000,
+//   headers: {
+//     'Content-Type': 'application/json',
+//     'Authorization': `Bearer ${localStorage.getItem('access_token') || ''}`,
+//   },
+// });
 
-apiClient.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// export default apiClient;
 
-apiClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    console.error('[Axios Error]', error.response?.data || error.message);
-    return Promise.reject(error);
-  }
-);
+export async function get(url: string) {
+  return await mockFetch(url, 'GET') ;
+}
+
+export async function post(url: string, body: any) {
+  return await mockFetch(url, 'POST', body);
+}
+
+export async function put(url: string, body: any) {
+  return await mockFetch(url, 'PUT', body);
+}
+
+

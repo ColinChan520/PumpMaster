@@ -1,0 +1,10 @@
+{
+  "/auth/login": {
+    "status": 200,
+    "data": {
+      "username": "john@example.com",
+      "token": "token123"
+    }
+  }
+}
+

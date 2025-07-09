@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Link } from '@mui/material';
 import Navbar from '../components/LoginNavBar.tsx';
-import { registerApi } from '../api/auth';
+import { post } from '../api/axios.ts';
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -18,7 +18,11 @@ export default function RegisterPage() {
   const handleRegister = async () => {
     setError('');
     try {
-      await registerApi({ firstName, lastName, address, phone, email, password });
+      const res = await post('/auth/register', { firstName, lastName, address, phone, email, password });
+      if (res.status !== 200) {
+        setError('Registration failed');
+        return;
+      }
       navigate('/login');
     } catch (err: any) {
       setError(err.message || 'Register failed');

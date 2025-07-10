@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar.tsx';
 
 const OverviewPage: React.FC = () => {
 
+
   return (
     <>
     <div style={{ backgroundColor: '#fff', minHeight: '100vh', minWidth: '100vw' }}>
@@ -37,16 +38,16 @@ const OverviewPage: React.FC = () => {
             <tbody>
               {[...Array(10)].map((_, index) => (
                 <tr key={index} className="border-b hover:bg-gray-50">
-                  <td className="py-2 px-3">Pump {index + 1}</td>
-                  <td className="py-2 px-3 text-blue-500 cursor-pointer">Centrifugal</td>
-                  <td className="py-2 px-3 text-blue-500 cursor-pointer">Area {String.fromCharCode(65 + index)}</td>
-                  <td className="py-2 px-3">34.0522</td>
-                  <td className="py-2 px-3">-118.2437</td>
-                  <td className="py-2 px-3">{1000 - index * 200} GPM</td>
-                  <td className="py-2 px-3">{index}s</td>
-                  <td className="py-2 px-3">{150 - index * 10} psi</td>
-                  <td className="py-2 px-3">{120 - index * 10} psi</td>
-                  <td className="py-2 px-3">{180 - index * 10} psi</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>Pump {index + 1}</td>
+                  <td className="py-2 px-3 text-blue-500 cursor-pointer" style ={{color: "black"}}>Centrifugal</td>
+                  <td className="py-2 px-3 text-blue-500 cursor-pointer" style ={{color: "black"}}>Area {String.fromCharCode(65 + index)}</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>34.0522</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>-118.2437</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{1000 - index * 200} GPM</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{index}s</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{150 - index * 10} psi</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{120 - index * 10} psi</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{180 - index * 10} psi</td>
                 </tr>
               ))}
             </tbody>

@@ -1,8 +1,32 @@
+import { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar.tsx';
+import { get } from '../api/axios.ts';
 
 
 const OverviewPage: React.FC = () => {
+    const [pumps, setPumps] = useState([]);
+  const [error, setError] = useState('');
 
+  useEffect(() => {
+    const fetchPumps = async () => {
+      try {
+        const res = await get('/pumps/get');
+        console.log('Get Pumps Response:', res);
+
+        if (res.status !== 200) {
+          setError('Failed to load pumps');
+          return;
+        }
+
+        setPumps(res.data);
+      } catch (err: any) {
+        console.error(err);
+        setError(err.message || 'Error fetching pumps');
+      }
+    };
+
+    fetchPumps();
+  }, []);
 
   return (
     <>
@@ -20,6 +44,7 @@ const OverviewPage: React.FC = () => {
         </div>
 
         <div className="overflow-x-auto" style ={{padding: "1%", paddingLeft: "1%"}}>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <table className="min-w-full text-left text-sm border-collapse" >
             <thead >
               <tr className="border-b" >
@@ -36,18 +61,18 @@ const OverviewPage: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {[...Array(10)].map((_, index) => (
-                <tr key={index} className="border-b hover:bg-gray-50">
-                  <td className="py-2 px-3" style ={{color: "black"}}>Pump {index + 1}</td>
-                  <td className="py-2 px-3 text-blue-500 cursor-pointer" style ={{color: "black"}}>Centrifugal</td>
-                  <td className="py-2 px-3 text-blue-500 cursor-pointer" style ={{color: "black"}}>Area {String.fromCharCode(65 + index)}</td>
-                  <td className="py-2 px-3" style ={{color: "black"}}>34.0522</td>
-                  <td className="py-2 px-3" style ={{color: "black"}}>-118.2437</td>
-                  <td className="py-2 px-3" style ={{color: "black"}}>{1000 - index * 200} GPM</td>
-                  <td className="py-2 px-3" style ={{color: "black"}}>{index}s</td>
-                  <td className="py-2 px-3" style ={{color: "black"}}>{150 - index * 10} psi</td>
-                  <td className="py-2 px-3" style ={{color: "black"}}>{120 - index * 10} psi</td>
-                  <td className="py-2 px-3" style ={{color: "black"}}>{180 - index * 10} psi</td>
+              {pumps.map((pump: any) => (
+                <tr key={pump.id} className="border-b hover:bg-gray-50">
+                  <td className="py-2 px-3" style ={{color: "black"}}>{pump['Pump Name']}</td>
+                  <td className="py-2 px-3 text-blue-500 cursor-pointer" style ={{color: "black"}}>{pump['Type']}</td>
+                  <td className="py-2 px-3 text-blue-500 cursor-pointer" style ={{color: "black"}}>{pump['Area']}</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{pump['Latitude']}</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{pump['Longitude']}</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{pump['Flow Rate']}</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{pump['Offset']}</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{pump['Current Pressure']}</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{pump['Min Pressure']}</td>
+                  <td className="py-2 px-3" style ={{color: "black"}}>{pump['Max Pressure']}</td>
                 </tr>
               ))}
             </tbody>

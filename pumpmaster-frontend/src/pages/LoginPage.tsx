@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Link } from '@mui/material';
 import { useUserStore } from '../stores/userStore.ts';
-import Navbar from '../components/LoginNavBar.tsx';
+import LoginNavbar from '../components/NavBar.tsx';
 import { post } from '../api/axios.ts';
 // import usersData from '../assets/usersInformation.json';
 
@@ -28,8 +28,7 @@ export default function LoginPage() {
 
   return (
     <div style={{ backgroundColor: '#fff', minHeight: '100vh', minWidth: '100vw' }}>
-      <Navbar />
-
+      <LoginNavbar showMenu={false}/>
       <div style={{
         maxWidth: '40%',
         margin: '20vh auto 0 auto',

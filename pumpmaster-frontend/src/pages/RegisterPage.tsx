@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Link } from '@mui/material';
-import Navbar from '../components/LoginNavBar.tsx';
+import Navbar from '../components/NavBar.tsx';
 import { post } from '../api/axios.ts';
 
 export default function RegisterPage() {

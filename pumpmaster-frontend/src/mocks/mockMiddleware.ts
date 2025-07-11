@@ -16,6 +16,27 @@ export async function mockFetch(url: string, method: string, data?: any) {
     }
   }
 
+  if (method === 'GET' && url.startsWith('/pumps/get/') && url !== '/pumps/get') {
+    if (getPumps && Array.isArray(getPumps.data)) {
+      const pumpId = url.split('/pumps/get/')[1];
+      const pump = getPumps.data.find((p: any) => p.id === pumpId);
+
+      if (pump) {
+        console.log(`[MockMiddleware] Fetched pump ${pumpId}`, pump);
+        return Promise.resolve({
+          status: 200,
+          data: pump,
+        });
+      } else {
+        console.log(`[MockMiddleware] Pump ${pumpId} not found`);
+        return Promise.reject({
+          status: 404,
+          message: 'Pump not found',
+        });
+      }
+    }
+  }
+
   if (method === 'PUT' && url === '/pumps/edit') {
     
     if (getPumps && Array.isArray(getPumps.data)) {

@@ -24,7 +24,16 @@
         "Offset": "10s",
         "Current Pressure": "150 psi",
         "Min Pressure": "120 psi",
-        "Max Pressure": "180 psi"
+        "Max Pressure": "180 psi",
+        "Chart data":[
+          { "time": "00:00", "pressure": 140 },
+          { "time": "03:00", "pressure": 145 },
+          { "time": "06:00", "pressure": 150 },
+          { "time": "09:00", "pressure": 155 },
+          { "time": "12:00", "pressure": 150 },
+          { "time": "15:00", "pressure": 148 },
+          { "time": "18:00", "pressure": 150 }
+        ]
       },
       {
         "id": "2",

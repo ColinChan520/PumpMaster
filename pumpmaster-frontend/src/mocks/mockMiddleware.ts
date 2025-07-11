@@ -1,3 +1,4 @@
+import { get } from '../api/axios';
 import mockData from '../assets/mockData.json';
 
 export async function mockFetch(url: string, method: string, data?: any) {
@@ -8,11 +9,8 @@ export async function mockFetch(url: string, method: string, data?: any) {
 
   if (method === 'POST' && url === '/pumps/add') {
     if (getPumps && Array.isArray(getPumps.data)) {
-      getPumps.data.push({
-        id: data.id,
-        info: data.info,
-      });
-      console.log(`[MockMiddleware] Added pump ${data.id} with info "${data.info}"`);
+      getPumps.data.push(data);
+      console.log(`[MockMiddleware] Added pump ${data.id}`);
     }
   }
 
@@ -40,10 +38,10 @@ export async function mockFetch(url: string, method: string, data?: any) {
   if (method === 'PUT' && url === '/pumps/edit') {
     
     if (getPumps && Array.isArray(getPumps.data)) {
-      const targetPump = getPumps.data.find((pump: any) => pump.id === data.id);
+      let targetPump = getPumps.data.find((pump: any) => pump.id === data.id);
       if (targetPump) {
-        targetPump.info = data.info;
-        console.log(`[MockMiddleware] Updated pump ${data.id} info to "${data.info}"`);
+        targetPump = data;
+        console.log(`[MockMiddleware] Updated pump ${data.id} info`);
       }
     }
   }

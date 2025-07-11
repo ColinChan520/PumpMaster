@@ -40,9 +40,7 @@ const OverviewPage: React.FC = () => {
     'Max Pressure': '',
   };
 
-
-  useEffect(() => {
-    const fetchPumps = async () => {
+  const fetchPumps = async () => {
       try {
         const res = await get('/pumps/get');
         if (res.status !== 200) {
@@ -55,6 +53,8 @@ const OverviewPage: React.FC = () => {
         setError(err.message || 'Error fetching pumps');
       }
     };
+
+  useEffect(() => {
     fetchPumps();
   }, []);
 
@@ -96,7 +96,7 @@ const OverviewPage: React.FC = () => {
         setError('Failed to add pumps');
         return;
       }
-      setPumps((prev) => [...prev, updatedPump]);
+      fetchPumps();
     }
 
   setSelectedPump(null);

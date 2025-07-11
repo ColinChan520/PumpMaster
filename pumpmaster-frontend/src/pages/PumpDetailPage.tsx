@@ -53,7 +53,7 @@ const PumpDetailPage: React.FC = () => {
 
         <Divider sx={{ my: 3 }} />
 
-        <Typography variant="h6" fontWeight="bold" gutterBottom>
+        <Typography variant="h6" fontWeight="bold" gutterBottom color="black">
             Attributes
         </Typography>
         <Grid container spacing={5} >
@@ -120,8 +120,16 @@ const PumpDetailPage: React.FC = () => {
         <Divider sx={{ my: 3 }} />
 
         <Typography variant="h6" color="primary" gutterBottom>Map</Typography>
-        <Paper elevation={1} sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Typography variant="body2" color="text.secondary">[Map]</Typography>
+        <Paper elevation={1} sx={{ height: 400 }}>
+          <iframe
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            style={{ border: 0 }}
+            src={`https://www.google.com/maps?q=${parseFloat(pumpData['Latitude'])},${parseFloat(pumpData['Longitude'])}&hl=en&z=14&output=embed`}
+            allowFullScreen
+            loading="lazy"
+          />
         </Paper>
 
         <Divider sx={{ my: 3 }} />
